@@ -21,7 +21,7 @@ jobs:
           REMOTE_HOST: ${{ secrets.HOST_DNS }}
           REMOTE_USER: ${{ secrets.USERNAME }}
           TARGET: ${{ secrets.TARGET_DIR }}
-
+          
       - name: Get last commit information
         id: commit-info
         run: |
@@ -35,7 +35,7 @@ jobs:
       - name: Check Deployment Status
         id: deployment-status
         run: |
-          if [ $DEPLOYMENT_SUCCESSFUL ]; then
+          if [  $? -eq 0 ]; then
             echo "::set-output name=status::success"
           else
             echo "::set-output name=status::failure"
