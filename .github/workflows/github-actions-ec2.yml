@@ -35,7 +35,7 @@ jobs:
       - name: Check Deployment Status
         id: deployment-status
         run: |
-          if [  ${{ steps.deployment.outcome }} == 'success' ]; then
+          if [  steps.deployment.outcome == 'success' ]; then
             echo "::set-output name=status::success"
           else
             echo "::set-output name=status::failure"
