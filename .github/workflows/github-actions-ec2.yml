@@ -57,6 +57,7 @@ jobs:
             Commit status: ${{  steps.commit-info.outputs.commit_status }}
             Dev Status: ${{ steps.deployment-status.outputs.status }}
             Job Status: ${{ needs.deploy.result }}
+            Outcome:  steps.deployment.outcome
           from: Saumil Jain
           to: saumil.jain@technostacks.com, vishal.chauhan@technostacks.com, saumiljain375@gmail.com
 
