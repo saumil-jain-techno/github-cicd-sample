@@ -23,12 +23,14 @@ jobs:
           else
             echo "::set-output name=deploy::false"
           fi
+          if: always()
       - name: Deploy to Server 1
-        if: steps.commit-info.outputs.deploy == 'true'
         uses: easingthemes/ssh-deploy@main
         env:
-          
-          
+          SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
+          REMOTE_HOST: ${{ secrets.HOST_DNS }}
+          REMOTE_USER: ${{ secrets.USERNAME }}
+          TARGET: ${{ secrets.TARGET_DIR }}
           
       - name: Get last commit information
         id: commit-info
