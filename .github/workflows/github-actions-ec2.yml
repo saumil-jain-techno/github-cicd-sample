@@ -27,7 +27,7 @@ jobs:
         if: always()
       - name: Debug deploy condition
         run: |
-          echo "Deploy condition value: ${{ steps.commit-info.outputs.deploy }}"
+          echo "Deploy condition value: ${{ steps.commit-check.outputs.deploy }}"
 
       - name: Deploy to Server 1
         if: steps.commit-info.outputs.deploy == 'true'
