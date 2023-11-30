@@ -25,21 +25,31 @@ jobs:
 
       - name: Send Notification on Success
         if: ${{ success() }}
-        run: |
-          COMMITTER=$(echo "${{ steps.commit-info.outputs.committer }}")
-          COMMIT_STATUS=$(echo "${{ steps.commit-info.outputs.commit_status }}")
-          echo "Deployment succeeded for commit by $COMMITTER. Commit status: $COMMIT_STATUS. Sending notification..."
-          echo "The deployment to EC2 was successful. Commit status: $COMMIT_STATUS by $COMMITTER." | mail -s "EC2 Deployment Succeeded" -a "From: Saumil Jain <${{ secrets.EMAIL_USERNAME }}>" saumil.jain@technostacks.com saumiljain375@gmail.com
+        uses: dawidd6/action-send-mail@v3
+        COMMITTER=$(echo "${{ steps.commit-info.outputs.committer }}")
+        COMMIT_STATUS=$(echo "${{ steps.commit-info.outputs.commit_status }}")
+        with:
+          server_address: smtp.gmail.com
+          server_port: 587
+          username: ${{ secrets.EMAIL_USERNAME }}
+          password: ${{ secrets.EMAIL_PASSWORD }}
+          subject: 'EC2 Deployment Succeeded for commit $COMMITTER'
+          body: 'The deployment to EC2 was successful.'
+          to: saumil.jain@technostacks.com, saumiljain375@gmail.com  # Add developer emails
 
       - name: Send Notification on Failure
         if: ${{ failure() }}
-        run: |
-          COMMITTER=$(echo "${{ steps.commit-info.outputs.committer }}")
-          COMMIT_STATUS=$(echo "${{ steps.commit-info.outputs.commit_status }}")
-          echo "Deployment failed for commit by $COMMITTER. Commit status: $COMMIT_STATUS. Sending notification..."
-          echo "The deployment to EC2 has failed. Commit status: $COMMIT_STATUS by $COMMITTER." | mail -s "EC2 Deployment Failed" -a "From: Saumil Jain <${{ secrets.EMAIL_USERNAME }}>" saumil.jain@technostacks.com saumiljain375@gmail.com
-
-
+        uses: dawidd6/action-send-mail@v3
+        COMMITTER=$(echo "${{ steps.commit-info.outputs.committer }}")
+        COMMIT_STATUS=$(echo "${{ steps.commit-info.outputs.commit_status }}")
+        with:
+          server_address: smtp.gmail.com
+          server_port: 587
+          username: ${{ secrets.EMAIL_USERNAME }}
+          password: ${{ secrets.EMAIL_PASSWORD }}
+          subject: 'EC2 Deployment Failed for commit $COMMITTER'
+          body: 'The deployment to EC2 has failed.'
+          to: saumil.jain@technostacks.com, saumiljain375@gmail.com  # Add developer emails
       - name: Executing remote ssh commands using ssh key
         uses: appleboy/ssh-action@master
         with:
