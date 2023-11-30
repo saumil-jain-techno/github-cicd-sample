@@ -54,7 +54,7 @@ jobs:
         if: always()
         
       - name: Send Notification on Success
-        if: ${{ success() }}
+        if: steps.commit-check.outputs.deploy == 'true'
         uses: dawidd6/action-send-mail@v3
         with:
           server_address: smtp.gmail.com
@@ -74,7 +74,7 @@ jobs:
           to: saumil.jain@technostacks.com, saumiljain375@gmail.com
 
       - name: Send Notification on Failure
-        if: ${{ failure() }}
+        if: steps.commit-check.outputs.deploy == 'false'
         uses: dawidd6/action-send-mail@v3
         with:
           server_address: smtp.gmail.com
