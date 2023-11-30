@@ -25,9 +25,6 @@ jobs:
             echo "::set-output name=deploy::false"
           fi
         if: always()
-      - name: Debug deploy condition
-        run: |
-          echo "Deploy condition value: ${{ steps.commit-check.outputs.deploy }}"
 
       - name: Deploy to Server 1
         if: steps.commit-info.outputs.deploy == 'true'
@@ -59,7 +56,7 @@ jobs:
         if: always()
         
       - name: Send Notification on Success
-        if: steps.commit-info.outputs.deploy == 'true'
+        if: steps.commit-check.outputs.deploy == 'true'
         uses: dawidd6/action-send-mail@v3
         with:
           server_address: smtp.gmail.com
@@ -79,7 +76,7 @@ jobs:
           to: saumil.jain@technostacks.com, saumiljain375@gmail.com
 
       - name: Send Notification on Failure
-        if: steps.commit-info.outputs.deploy == 'false'
+        if: steps.commit-check.outputs.deploy == 'false'
         uses: dawidd6/action-send-mail@v3
         with:
           server_address: smtp.gmail.com
