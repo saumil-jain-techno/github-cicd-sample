@@ -23,6 +23,29 @@ jobs:
           REMOTE_USER: ${{ secrets.USERNAME }}
           TARGET: ${{ secrets.TARGET_DIR }}
 
+      - name: Send Notification on Success
+        if: ${{ success() }}
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 587
+          username: ${{ secrets.EMAIL_USERNAME }}
+          password: ${{ secrets.EMAIL_PASSWORD }}
+          subject: 'EC2 Deployment Succeeded'
+          body: 'The deployment to EC2 was successful.'
+          to: saumil.jain@technostacks.com, saumiljain375@gmail.com  # Add developer emails
+
+      - name: Send Notification on Failure
+        if: ${{ failure() }}
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 587
+          username: ${{ secrets.EMAIL_USERNAME }}
+          password: ${{ secrets.EMAIL_PASSWORD }}
+          subject: 'EC2 Deployment Failed'
+          body: 'The deployment to EC2 has failed.'
+          to: saumil.jain@technostacks.com, saumiljain375@gmail.com  # Add developer emails
       - name: Executing remote ssh commands using ssh key
         uses: appleboy/ssh-action@master
         with:
