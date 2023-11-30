@@ -33,6 +33,7 @@ jobs:
           password: ${{ secrets.EMAIL_PASSWORD }}
           subject: 'EC2 Deployment Succeeded'
           body: 'The deployment to EC2 was successful.'
+          from: saumil.jain@technostacks.com
           to: saumil.jain@technostacks.com, saumiljain375@gmail.com  # Add developer emails
 
       - name: Send Notification on Failure
@@ -45,6 +46,7 @@ jobs:
           password: ${{ secrets.EMAIL_PASSWORD }}
           subject: 'EC2 Deployment Failed'
           body: 'The deployment to EC2 has failed.'
+          from: saumil.jain@technostacks.com
           to: saumil.jain@technostacks.com, saumiljain375@gmail.com  # Add developer emails
       - name: Executing remote ssh commands using ssh key
         uses: appleboy/ssh-action@master
