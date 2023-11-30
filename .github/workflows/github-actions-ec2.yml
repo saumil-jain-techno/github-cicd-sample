@@ -44,6 +44,7 @@ jobs:
           body: |
             The deployment to EC2 was successful.
             Commit message: ${{ steps.commit-info.outputs.commit_message }}
+            Commit status: ${{  steps.commit-info.outputs.commit_status }}
           from: Saumil Jain
           to: saumil.jain@technostacks.com, vishal.chauhan@technostacks.com, saumiljain375@gmail.com
 
@@ -59,6 +60,7 @@ jobs:
           body: |
             The deployment to EC2 has failed.
             Commit message: ${{ steps.commit-info.outputs.commit_message }}
+            Commit status: ${{  steps.commit-info.outputs.commit_status }}
           from: Saumil Jain
           to: saumil.jain@technostacks.com, vishal.chauhan@technostacks.com, saumiljain375@gmail.com
 
