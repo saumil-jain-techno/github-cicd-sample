@@ -45,7 +45,7 @@ jobs:
             The deployment to EC2 was successful.
             Commit message: ${{ steps.commit-info.outputs.commit_message }}
           from: Saumil Jain
-          to: saumil.jain@technostacks.com, saumiljain375@gmail.com
+          to: vishal.chauhan@technostacks.com, saumiljain375@gmail.com
 
       - name: Send Notification on Failure
         if: failure()
@@ -60,7 +60,7 @@ jobs:
             The deployment to EC2 has failed.
             Commit message: ${{ steps.commit-info.outputs.commit_message }}
           from: Saumil Jain
-          to: saumil.jain@technostacks.com, saumiljain375@gmail.com
+          to: vishal.chauhan@technostacks.com, saumiljain375@gmail.com
 
       - name: Executing remote ssh commands using ssh key
         uses: appleboy/ssh-action@master
