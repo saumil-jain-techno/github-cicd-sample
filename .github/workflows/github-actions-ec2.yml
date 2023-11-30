@@ -29,7 +29,7 @@ jobs:
           COMMITTER=$(echo "${{ steps.commit-info.outputs.committer }}")
           COMMIT_STATUS=$(echo "${{ steps.commit-info.outputs.commit_status }}")
           echo "Deployment succeeded for commit by $COMMITTER. Commit status: $COMMIT_STATUS. Sending notification..."
-          echo "The deployment to EC2 was successful. Commit status: $COMMIT_STATUS by $COMMITTER." | mail -s "EC2 Deployment Succeeded" -a "From: Saumil Jain <${{ secrets.EMAIL_USERNAME }}>" developer1@example.com developer2@example.com
+          echo "The deployment to EC2 was successful. Commit status: $COMMIT_STATUS by $COMMITTER." | mail -s "EC2 Deployment Succeeded" -a "From: Saumil Jain <${{ secrets.EMAIL_USERNAME }}>" saumil.jain@technostacks.com saumiljain375@gmail.com
 
       - name: Send Notification on Failure
         if: ${{ failure() }}
@@ -37,7 +37,7 @@ jobs:
           COMMITTER=$(echo "${{ steps.commit-info.outputs.committer }}")
           COMMIT_STATUS=$(echo "${{ steps.commit-info.outputs.commit_status }}")
           echo "Deployment failed for commit by $COMMITTER. Commit status: $COMMIT_STATUS. Sending notification..."
-          echo "The deployment to EC2 has failed. Commit status: $COMMIT_STATUS by $COMMITTER." | mail -s "EC2 Deployment Failed" -a "From: Saumil Jain <${{ secrets.EMAIL_USERNAME }}>" developer1@example.com developer2@example.com
+          echo "The deployment to EC2 has failed. Commit status: $COMMIT_STATUS by $COMMITTER." | mail -s "EC2 Deployment Failed" -a "From: Saumil Jain <${{ secrets.EMAIL_USERNAME }}>" saumil.jain@technostacks.com saumiljain375@gmail.com
 
 
       - name: Executing remote ssh commands using ssh key
