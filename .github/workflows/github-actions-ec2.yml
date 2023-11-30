@@ -23,7 +23,7 @@ jobs:
           else
             echo "::set-output name=deploy::false"
           fi
-          if: always()
+        if: always()
       - name: Deploy to Server 1
         uses: easingthemes/ssh-deploy@main
         env:
