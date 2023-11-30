@@ -89,6 +89,7 @@ jobs:
             Dev Status: ${{ steps.deployment-status.outputs.status }}
             Job Status: ${{ needs.deploy.result }}
             Outcome:  ${{ steps.deployment.outcome }}
+            GitHubJobStatus: ${{ github.job }} job of ${{ github.repository }} has ${{ job.status }}
           from: Saumil Jain
           to: saumil.jain@technostacks.com, saumiljain375@gmail.com
 
