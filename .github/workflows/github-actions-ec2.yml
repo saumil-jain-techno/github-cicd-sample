@@ -54,7 +54,7 @@ jobs:
         if: always()
         
       - name: Send Notification on Success
-        if: steps.commit-info.outputs..deploy == 'true'
+        if: steps.commit-info.outputs.deploy == 'true'
         uses: dawidd6/action-send-mail@v3
         with:
           server_address: smtp.gmail.com
