@@ -25,6 +25,10 @@ jobs:
             echo "::set-output name=deploy::false"
           fi
         if: always()
+      - name: Debug deploy condition
+        run: |
+          echo "Deploy condition value: ${{ steps.commit-info.outputs.deploy }}"
+
       - name: Deploy to Server 1
         if: steps.commit-info.outputs.deploy == 'true'
         uses: easingthemes/ssh-deploy@main
