@@ -32,5 +32,3 @@ jobs:
           script: |
             sudo service apache2 restart 
             
-            cd home
-            sudo mv * /var/www/html
