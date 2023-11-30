@@ -25,7 +25,7 @@ jobs:
           fi
         if: always()
       - name: Deploy to Server 1
-        if: steps.commit-check.outputs.deploy == 'true'
+        if: steps.commit-info.outputs..deploy == 'true'
         uses: easingthemes/ssh-deploy@main
         env:
           SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
@@ -54,7 +54,7 @@ jobs:
         if: always()
         
       - name: Send Notification on Success
-        if: success()
+        if: steps.commit-info.outputs..deploy == 'true'
         uses: dawidd6/action-send-mail@v3
         with:
           server_address: smtp.gmail.com
@@ -74,7 +74,7 @@ jobs:
           to: saumil.jain@technostacks.com, saumiljain375@gmail.com
 
       - name: Send Notification on Failure
-        if: failure()
+        if: steps.commit-info.outputs..deploy == 'false'
         uses: dawidd6/action-send-mail@v3
         with:
           server_address: smtp.gmail.com
@@ -101,7 +101,7 @@ jobs:
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
             sudo service apache2 restart
-            servive httpd restart
+            
             
             
             
