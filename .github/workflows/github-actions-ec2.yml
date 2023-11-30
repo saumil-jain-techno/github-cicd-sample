@@ -38,7 +38,7 @@ jobs:
           server_port: 587
           username: ${{ secrets.EMAIL_USERNAME }}
           password: ${{ secrets.EMAIL_PASSWORD }}
-          subject: 'EC2 Deployment Succeeded for commit $COMMITTER'
+          subject: "EC2 Deployment Succeeded for commit $COMMITTER"
           body: 'The deployment to EC2 was successful.'
           from: Saumil Jain
           to: saumil.jain@technostacks.com, saumiljain375@gmail.com
@@ -51,7 +51,7 @@ jobs:
           server_port: 587
           username: ${{ secrets.EMAIL_USERNAME }}
           password: ${{ secrets.EMAIL_PASSWORD }}
-          subject: 'EC2 Deployment Failed for commit $COMMITTER'
+          subject: "EC2 Deployment Failed for commit $COMMITTER"
           body: 'The deployment to EC2 has failed.'
           from: Saumil Jain
           to: saumil.jain@technostacks.com, saumiljain375@gmail.com
