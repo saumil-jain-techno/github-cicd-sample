@@ -59,7 +59,7 @@ jobs:
             Job Status: ${{ needs.deploy.result }}
             Outcome:  ${{ steps.deployment.outcome }}
           from: Saumil Jain
-          to: saumil.jain@technostacks.com, vishal.chauhan@technostacks.com, saumiljain375@gmail.com
+          to: saumil.jain@technostacks.com, saumiljain375@gmail.com
 
       - name: Send Notification on Failure
         if: ${{ failure() }}
@@ -75,7 +75,7 @@ jobs:
             Commit message: ${{ steps.commit-info.outputs.commit_message }}
             Commit status: ${{  steps.commit-info.outputs.commit_status }}
           from: Saumil Jain
-          to: saumil.jain@technostacks.com, vishal.chauhan@technostacks.com, saumiljain375@gmail.com
+          to: saumil.jain@technostacks.com, saumiljain375@gmail.com
 
       - name: Executing remote ssh commands using ssh key
         uses: appleboy/ssh-action@master
