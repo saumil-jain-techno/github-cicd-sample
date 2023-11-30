@@ -35,7 +35,7 @@ jobs:
       - name: Check Deployment Status
         id: deployment-status
         run: |
-          if [ ${{ success() }} == 'true' ]; then
+          if [ $DEPLOYMENT_SUCCESSFUL ]; then
             echo "::set-output name=status::success"
           else
             echo "::set-output name=status::failure"
