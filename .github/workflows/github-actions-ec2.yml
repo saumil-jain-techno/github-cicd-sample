@@ -27,8 +27,10 @@ jobs:
         run: |
           COMMITTER=$(git log -1 --pretty=format:'%an')
           COMMIT_STATUS=$(git log -1 --pretty=format:'%B' | grep -i 'fix\|bug\|error' | wc -l)
+          COMMIT_MESSAGE=$(git log -1 --pretty=%B)
           echo "::set-output name=committer::$COMMITTER"
           echo "::set-output name=commit_status::$COMMIT_STATUS"
+          echo "::set-output name=commit_message::$COMMIT_MESSAGE"
 
       - name: Send Notification on Success
         if: success()
@@ -39,7 +41,9 @@ jobs:
           username: ${{ secrets.EMAIL_USERNAME }}
           password: ${{ secrets.EMAIL_PASSWORD }}
           subject: "EC2 Deployment Succeeded for commit ${{ steps.commit-info.outputs.committer }}"
-          body: 'The deployment to EC2 was successful.'
+          body: |
+            The deployment to EC2 was successful.
+            Commit message: ${{ steps.commit-info.outputs.commit_message }}
           from: Saumil Jain
           to: saumil.jain@technostacks.com, saumiljain375@gmail.com
 
@@ -52,7 +56,9 @@ jobs:
           username: ${{ secrets.EMAIL_USERNAME }}
           password: ${{ secrets.EMAIL_PASSWORD }}
           subject: "EC2 Deployment Failed for commit ${{ steps.commit-info.outputs.committer }}"
-          body: 'The deployment to EC2 has failed.'
+          body: |
+            The deployment to EC2 has failed.
+            Commit message: ${{ steps.commit-info.outputs.commit_message }}
           from: Saumil Jain
           to: saumil.jain@technostacks.com, saumiljain375@gmail.com
 
