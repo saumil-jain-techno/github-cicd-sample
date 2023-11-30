@@ -13,8 +13,18 @@ jobs:
     steps:
       - name: Checkout the code
         uses: actions/checkout@v2
-
+        
+      - name: Check Commit Message
+        id: commit-check
+        run: |
+          COMMIT_MESSAGE=$(git log -1 --pretty=%B)
+          if [[ $COMMIT_MESSAGE == *"123456"* ]]; then
+            echo "::set-output name=deploy::true"
+          else
+            echo "::set-output name=deploy::false"
+          fi
       - name: Deploy to Server 1
+        if: steps.commit-info.outputs.deploy == 'true'
         uses: easingthemes/ssh-deploy@main
         env:
           SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
@@ -31,7 +41,7 @@ jobs:
           echo "::set-output name=committer::$COMMITTER"
           echo "::set-output name=commit_status::$COMMIT_STATUS"
           echo "::set-output name=commit_message::$COMMIT_MESSAGE"
-          
+        
       - name: Check Deployment Status
         id: deployment-status
         run: |
