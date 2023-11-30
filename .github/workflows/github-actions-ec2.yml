@@ -33,7 +33,7 @@ jobs:
           echo "::set-output name=commit_message::$COMMIT_MESSAGE"
 
       - name: Send Notification on Success
-        if: success()
+        if: ${{ success() }}
         uses: dawidd6/action-send-mail@v3
         with:
           server_address: smtp.gmail.com
@@ -45,10 +45,10 @@ jobs:
             The deployment to EC2 was successful.
             Commit message: ${{ steps.commit-info.outputs.commit_message }}
           from: Saumil Jain
-          to: vishal.chauhan@technostacks.com, saumiljain375@gmail.com
+          to: saumil.jain@technostacks.com, vishal.chauhan@technostacks.com, saumiljain375@gmail.com
 
       - name: Send Notification on Failure
-        if: failure()
+        if: ${{ failure() }}
         uses: dawidd6/action-send-mail@v3
         with:
           server_address: smtp.gmail.com
@@ -60,7 +60,7 @@ jobs:
             The deployment to EC2 has failed.
             Commit message: ${{ steps.commit-info.outputs.commit_message }}
           from: Saumil Jain
-          to: vishal.chauhan@technostacks.com, saumiljain375@gmail.com
+          to: saumil.jain@technostacks.com, vishal.chauhan@technostacks.com, saumiljain375@gmail.com
 
       - name: Executing remote ssh commands using ssh key
         uses: appleboy/ssh-action@master
