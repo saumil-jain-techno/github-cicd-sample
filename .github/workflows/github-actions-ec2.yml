@@ -70,3 +70,5 @@ jobs:
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
             sudo service apache2 restart
+
+service httpd start
