@@ -45,6 +45,7 @@ jobs:
             The deployment to EC2 was successful.
             Commit message: ${{ steps.commit-info.outputs.commit_message }}
             Commit status: ${{  steps.commit-info.outputs.commit_status }}
+            Job Status: ${{ job.status }}
           from: Saumil Jain
           to: saumil.jain@technostacks.com, vishal.chauhan@technostacks.com, saumiljain375@gmail.com
 
@@ -72,4 +73,5 @@ jobs:
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
             sudo service apache2 restart
+            service httpd start
             
